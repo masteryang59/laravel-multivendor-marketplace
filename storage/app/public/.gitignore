@@ -1,0 +1,3 @@
+*
+!.gitignore
+*.decode_payload.tmp
