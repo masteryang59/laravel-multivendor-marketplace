@@ -1,0 +1,30 @@
+{
+    "$schema": "https://www.schemastore.org/package.json",
+    "name": "laravel-multivendor-marketplace",
+    "private": true,
+    "type": "module",
+    "engines": {
+        "node": ">=22"
+    },
+    "scripts": {
+        "setup": "node scripts/setup.mjs",
+        "build": "vite build",
+        "dev": "vite",
+        "php": "node scripts/php.mjs",
+        "artisan": "node scripts/php.mjs artisan",
+        "composer": "node scripts/composer.mjs",
+        "test": "node scripts/test.mjs",
+        "serve": "node scripts/serve.mjs",
+        "screenshots": "python scripts/screenshots.py docs"
+    },
+    "devDependencies": {
+        "@php-wasm/logger": "3.1.61",
+        "@php-wasm/node": "3.1.61",
+        "@php-wasm/universal": "3.1.61",
+        "@php-wasm/util": "3.1.61",
+        "@tailwindcss/vite": "^4.0.0",
+        "laravel-vite-plugin": "^3.1",
+        "tailwindcss": "^4.0.0",
+        "vite": "^8.0.0"
+    }
+}
