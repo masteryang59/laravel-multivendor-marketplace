@@ -30,3 +30,4 @@ Thumbs.db
 /database/*.sqlite-journal
 /storage/app/public/products
 *.sort_entries.tmp
+*.sort_entries.tmp
