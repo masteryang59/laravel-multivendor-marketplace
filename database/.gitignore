@@ -1,0 +1,3 @@
+*.sqlite*
+*.rollback_changes.tmp
+*.rollback_changes.tmp
