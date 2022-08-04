@@ -1,0 +1,91 @@
+# docker compose up --build   ->  http://localhost:8080  (Mailpit: http://localhost:8025)
+# Seeds the demo marketplace on first start. Logins are listed on the sign-in page.
+
+x-app: &app
+  build: .
+  image: laravel-multivendor-marketplace
+  environment: &env
+    APP_NAME: Bazaar
+    APP_ENV: production
+    APP_DEBUG: "false"
+    # Demo key so `docker compose up` works on a fresh clone. Set APP_KEY in
+    # .env (php artisan key:generate --show) for anything that isn't a demo.
+    APP_KEY: ${APP_KEY:-base64:+nRgNyZI9A3HCViEEIMsVZ/hl9Pu+f2zoYCXEhCtHcc=}
+    APP_URL: http://localhost:8080
+    LOG_CHANNEL: stderr
+    DB_CONNECTION: mysql
+    DB_HOST: mysql
+    DB_PORT: "3306"
+    DB_DATABASE: marketplace
+    DB_USERNAME: marketplace
+    DB_PASSWORD: secret
+    QUEUE_CONNECTION: database
+    CACHE_STORE: database
+    SESSION_DRIVER: database
+    MAIL_MAILER: smtp
+    MAIL_HOST: mailpit
+    MAIL_PORT: "1025"
+    MAIL_FROM_ADDRESS: orders@bazaar.test
+    MARKETPLACE_DEMO: "true"
+    FAKEPAY_WEBHOOK_SECRET: ${FAKEPAY_WEBHOOK_SECRET:-whsec_compose_demo}
+    # Webhooks travel container to container, not through the published port.
+    FAKEPAY_WEBHOOK_URL: http://web/webhooks/fakepay
+  volumes:
+    - uploads:/var/www/html/storage/app/public
+  depends_on:
+    mysql:
+      condition: service_healthy
+
+services:
+  web:
+    <<: *app
+    environment:
+      <<: *env
+      RUN_MIGRATIONS: "true"
+      SEED_DEMO: "true"
+    ports:
+      - "8080:80"
+
+  worker:
+    <<: *app
+    user: www-data
+    command: ["php", "artisan", "queue:work", "--tries=8", "--max-time=3600"]
+    depends_on:
+      web:
+        condition: service_started
+
+  scheduler:
+    <<: *app
+    user: www-data
+    command: ["php", "artisan", "schedule:work"]
+    depends_on:
+      web:
+        condition: service_started
+
+  mysql:
+    image: mysql:8.4
+    environment:
+      MYSQL_DATABASE: marketplace
+      MYSQL_USER: marketplace
+      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - mysql:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-umarketplace", "-psecret"]
+      interval: 3s
+      timeout: 3s
+      retries: 30
+
+  mailpit:
+    image: axllent/mailpit:v1.21.8
+    ports:
+      - "8025:8025"
+
+volumes:
+  mysql:
+  uploads:
+export_csv:
+  enabled: true
+promote_user:
+  enabled: true
