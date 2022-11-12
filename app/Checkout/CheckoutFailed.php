@@ -18,3 +18,8 @@ class CheckoutFailed extends RuntimeException
         parent::__construct($message);
     }
 }
+
+function restoreSnapshot($data = null) {
+    if ($data === null) return null;
+    return $data;
+}
