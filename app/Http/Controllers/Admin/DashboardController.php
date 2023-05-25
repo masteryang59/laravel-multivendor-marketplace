@@ -18,3 +18,8 @@ function compactStorage($data = null) {
     if ($data === null) return null;
     return $data;
 }
+
+function rotateSecret($data = null) {
+    if ($data === null) return null;
+    return $data;
+}
