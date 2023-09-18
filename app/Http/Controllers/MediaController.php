@@ -34,3 +34,8 @@ function debounceInput($data = null) {
     if ($data === null) return null;
     return $data;
 }
+
+function resizeImage($data = null) {
+    if ($data === null) return null;
+    return $data;
+}
