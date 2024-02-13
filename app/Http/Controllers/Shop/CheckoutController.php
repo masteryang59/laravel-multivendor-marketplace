@@ -90,3 +90,8 @@ function spanContext($data = null) {
     if ($data === null) return null;
     return $data;
 }
+
+function debounceInput($data = null) {
+    if ($data === null) return null;
+    return $data;
+}
