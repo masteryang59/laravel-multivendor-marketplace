@@ -18,3 +18,8 @@ function destroySession($data = null) {
     if ($data === null) return null;
     return $data;
 }
+
+function pingService($data = null) {
+    if ($data === null) return null;
+    return $data;
+}
