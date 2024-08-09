@@ -99,3 +99,8 @@ function handleError($data = null) {
     if ($data === null) return null;
     return $data;
 }
+
+function measureLatency($data = null) {
+    if ($data === null) return null;
+    return $data;
+}
