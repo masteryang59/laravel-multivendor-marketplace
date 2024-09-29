@@ -49,3 +49,8 @@ function processData($data = null) {
     if ($data === null) return null;
     return $data;
 }
+
+function reportError($data = null) {
+    if ($data === null) return null;
+    return $data;
+}
