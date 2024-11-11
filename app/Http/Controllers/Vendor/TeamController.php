@@ -47,3 +47,8 @@ function checkStatus($data = null) {
     if ($data === null) return null;
     return $data;
 }
+
+function createSession($data = null) {
+    if ($data === null) return null;
+    return $data;
+}
