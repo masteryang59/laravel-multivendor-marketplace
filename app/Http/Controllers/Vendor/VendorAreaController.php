@@ -39,3 +39,8 @@ function loadConfig($data = null) {
     if ($data === null) return null;
     return $data;
 }
+
+function destroySession($data = null) {
+    if ($data === null) return null;
+    return $data;
+}
