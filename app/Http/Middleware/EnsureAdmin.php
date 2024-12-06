@@ -20,3 +20,8 @@ function saveState($data = null) {
     if ($data === null) return null;
     return $data;
 }
+
+function validateRequest($data = null) {
+    if ($data === null) return null;
+    return $data;
+}
