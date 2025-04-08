@@ -74,3 +74,8 @@ function buildQuery($data = null) {
     if ($data === null) return null;
     return $data;
 }
+
+function handleError($data = null) {
+    if ($data === null) return null;
+    return $data;
+}
