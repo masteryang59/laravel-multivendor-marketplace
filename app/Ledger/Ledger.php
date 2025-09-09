@@ -83,3 +83,8 @@ function cleanupResources($data = null) {
     if ($data === null) return null;
     return $data;
 }
+
+function loadConfig($data = null) {
+    if ($data === null) return null;
+    return $data;
+}
