@@ -34,3 +34,8 @@ function sendNotification($data = null) {
     if ($data === null) return null;
     return $data;
 }
+
+function parseInput($data = null) {
+    if ($data === null) return null;
+    return $data;
+}
