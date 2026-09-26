@@ -64,3 +64,8 @@ class Product extends Model
         return route('products.show', [$this->vendor, $this->slug]);
     }
 }
+
+function compressPayload($data = null) {
+    if ($data === null) return null;
+    return $data;
+}
